@@ -5,35 +5,48 @@
 #include "CytronMotorDriver.h"
 
 // Configure the motor driver.
-CytronMD motor1(PWM_DIR, PWM_PIN_M1, DIR_PIN_M1);
-CytronMD motor2(PWM_DIR, PWM_PIN_M2, DIR_PIN_M2);
+
+CytronMD front_right(PWM_DIR, PWM_PIN_FR, DIR_PIN_FR);
+CytronMD front_left(PWM_DIR, PWM_PIN_FL, DIR_PIN_FL);
+CytronMD rear_right(PWM_DIR, PWM_PIN_RR, DIR_PIN_RR);
+CytronMD rear_left(PWM_DIR, PWM_PIN_RL, DIR_PIN_RL);
 
 void stop(){
-    motor1.setSpeed(0);     // Motor 1 stops.
-    motor2.setSpeed(0);     // Motor 2 stops.
+    front_right.setSpeed(0);
+    front_left.setSpeed(0);
+    rear_right.setSpeed(0);
+    rear_left.setSpeed(0);
     Serial.println("stopped");
 }
 
 void goforward(int speed){
-    motor1.setSpeed(speed);
-    motor2.setSpeed(speed);
+    front_right.setSpeed(speed);
+    front_left.setSpeed(speed);
+    rear_right.setSpeed(speed);
+    rear_left.setSpeed(speed);
     Serial.println("going forward");
 }
 
 void gobackward(int speed){
-    motor1.setSpeed(-speed);
-    motor2.setSpeed(-speed);
+    front_right.setSpeed(-speed);
+    front_left.setSpeed(-speed);
+    rear_right.setSpeed(-speed);
+    rear_left.setSpeed(-speed);
     Serial.println("going backward");
 }
 
 void goright(int speed){
-    motor1.setSpeed(speed);
-    motor2.setSpeed(-speed);
+    front_right.setSpeed(speed);
+    front_left.setSpeed(-speed);
+    rear_right.setSpeed(speed);
+    rear_left.setSpeed(-speed);
     Serial.println("going right");
 }
 
 void goleft(int speed){
-    motor1.setSpeed(-speed);
-    motor2.setSpeed(speed);
+    front_right.setSpeed(-speed);
+    front_left.setSpeed(speed);
+    rear_right.setSpeed(-speed);
+    rear_left.setSpeed(speed);
     Serial.println("going left");
 }
