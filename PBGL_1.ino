@@ -8,6 +8,7 @@
  *
  * This example shows how to drive 2 motors using 4 PWM pins (2 for each motor)
  * with 2-channel motor driver.
+ * M1A, M2A DIR PIN
  * 
  * 
  * CONNECTIONS:
@@ -30,8 +31,8 @@
 
 
 // Configure the motor driver.
-CytronMD motor1(PWM_PWM, 3, 9);   // PWM 1A = Pin 3, PWM 1B = Pin 9.
-CytronMD motor2(PWM_PWM, 10, 11); // PWM 2A = Pin 10, PWM 2B = Pin 11.
+CytronMD motor1(PWM_PWM, 7, 6);   // PWM 1A = Pin 3, PWM 1B = Pin 9.
+CytronMD motor2(PWM_PWM, 12, 11); // PWM 2A = Pin 10, PWM 2B = Pin 11.
 
 char key;
 
@@ -72,10 +73,11 @@ void forward() {
 }
 
 void backward(){
-  motor1.setSpeed(-128);   // Motor 1 runs forward at 50% speed.
-  motor2.setSpeed(-128);  // Motor 2 runs backward at 50% speed.
+  motor1.setSpeed(-20);   // Motor 1 runs forward at 50% speed.
+  motor2.setSpeed(-20);  // Motor 2 runs backward at 50% speed.
   Serial.print("backward");
 }
+
 
 void turn_right(){
   motor1.setSpeed(128);   // Motor 1 runs forward at 50% speed.
