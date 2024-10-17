@@ -21,32 +21,32 @@ void stop(){
 
 void goforward(int speed){
     front_right.setSpeed(speed);
-    front_left.setSpeed(speed);
-    rear_right.setSpeed(speed);
-    rear_left.setSpeed(speed);
+    // front_left.setSpeed(speed);
+    // rear_right.setSpeed(speed);
+    // rear_left.setSpeed(speed);
     Serial.println("going forward");
 }
 
 void gobackward(int speed){
-    front_right.setSpeed(-speed);
-    front_left.setSpeed(-speed);
-    rear_right.setSpeed(-speed);
-    rear_left.setSpeed(-speed);
+    // front_right.setSpeed(-speed);
+    front_left.setSpeed(speed);
+    // rear_right.setSpeed(-speed);
+   1 // rear_left.setSpeed(-speed);
     Serial.println("going backward");
 }
 
 void goright(int speed){
-    front_right.setSpeed(speed);
-    front_left.setSpeed(-speed);
+    // front_right.setSpeed(speed);
+    // front_left.setSpeed(-speed);
     rear_right.setSpeed(speed);
-    rear_left.setSpeed(-speed);
+    // rear_left.setSpeed(-speed);
     Serial.println("going right");
 }
 
 void goleft(int speed){
-    front_right.setSpeed(-speed);
-    front_left.setSpeed(speed);
-    rear_right.setSpeed(-speed);
+    // front_right.setSpeed(-speed);
+    // front_left.setSpeed(speed);
+    // rear_right.setSpeed(-speed);
     rear_left.setSpeed(speed);
     Serial.println("going left");
 }
