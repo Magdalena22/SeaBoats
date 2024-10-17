@@ -30,8 +30,10 @@
 
 
 // Configure the motor driver.
-CytronMD motor1(PWM_PWM, 3, 9);   // PWM 1A = Pin 3, PWM 1B = Pin 9.
-CytronMD motor2(PWM_PWM, 10, 11); // PWM 2A = Pin 10, PWM 2B = Pin 11.
+CytronMD front_right(PWM_PWM, 7, 6);   // PWM 1A = Pin 7, PWM 1B = Pin 6.
+CytronMD front_left(PWM_PWM, 12, 11); // PWM 2A = Pin 12, PWM 2B = Pin 11.
+CytronMD rear_right(PWM_PWM, 8, 9);   // PWM 1A = Pin 8, PWM 1B = Pin 9.
+CytronMD rear_left(PWM_PWM, 4, 5); // PWM 2A = Pin 4, PWM 2B = Pin 5.
 
 char key;
 
@@ -66,31 +68,41 @@ void loop() {
 
 
 void forward() {
-  motor1.setSpeed(128);   // Motor 1 runs forward at 50% speed.
-  motor2.setSpeed(128);  // Motor 2 runs backward at 50% speed.
+  front_right.setSpeed(128);   // front_right runs forward at 50% speed.
+  front_left.setSpeed(128);  // front_left runs backward at 50% speed.
+  rear_right.setSpeed(128);   // rear_right runs forward at 50% speed.
+  rear_left.setSpeed(128);  // rear_left runs backward at 50% speed.
   Serial.print("forward");
 }
 
 void backward(){
-  motor1.setSpeed(-128);   // Motor 1 runs forward at 50% speed.
-  motor2.setSpeed(-128);  // Motor 2 runs backward at 50% speed.
+  front_right.setSpeed(-128);   // front_right runs forward at 50% speed.
+  front_left.setSpeed(-128);  // front_left runs backward at 50% speed.
+  rear_right.setSpeed(-128);   // rear_right runs forward at 50% speed.
+  rear_left.setSpeed(-128);  // rear_left runs backward at 50% speed.
   Serial.print("backward");
 }
 
 void turn_right(){
-  motor1.setSpeed(128);   // Motor 1 runs forward at 50% speed.
-  motor2.setSpeed(-128);  // Motor 2 runs backward at 50% speed.
+  front_right.setSpeed(128);   // front_right runs forward at 50% speed.
+  front_left.setSpeed(-128);  // front_left runs backward at 50% speed.
+  rear_right.setSpeed(128);   // rear_right runs forward at 50% speed.
+  rear_left.setSpeed(-128);  // rear_left runs backward at 50% speed.
   Serial.print("turn_right");
 }
 
 void turn_left(){
-  motor1.setSpeed(-128);   // Motor 1 runs forward at 50% speed.
-  motor2.setSpeed(128);  // Motor 2 runs backward at 50% speed.
+  front_right.setSpeed(-128);   // front_right runs forward at 50% speed.
+  front_left.setSpeed(128);  // front_left runs backward at 50% speed.
+  rear_right.setSpeed(-128);   // rear_right runs forward at 50% speed.
+  rear_left.setSpeed(128);  // rear_left runs backward at 50% speed.
   Serial.print("turn_left");
 }
 
 void stop(){
-  motor1.setSpeed(0);   // Motor 1 runs forward at 50% speed.
-  motor2.setSpeed(0);  // Motor 2 runs backward at 50% speed.
+  front_right.setSpeed(0);   // front_right runs forward at 0% speed.
+  front_left.setSpeed(0);  // front_left runs backward at 0% speed.
+  rear_right.setSpeed(0);   // rear_right runs forward at 0% speed.
+  rear_left.setSpeed(0);  // rear_left runs backward at 0% speed.
   Serial.print("stop");
 }
