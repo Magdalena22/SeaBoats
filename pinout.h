@@ -9,3 +9,7 @@
 #define DIR_PIN_RR  9
 #define PWM_PIN_RL  4
 #define DIR_PIN_RL  5
+
+// ultrasonic sensor
+#define ULTR_L_TRIG 14
+#define ULTR_L_ECHO 15

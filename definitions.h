@@ -12,3 +12,6 @@
 #define GODIAGONALBACKLEFT 'z'
 #define TURNLEFT      'f'
 #define TURNRIGHT     'r'
+
+// constants
+#define CHECK_INTERVAL  1000

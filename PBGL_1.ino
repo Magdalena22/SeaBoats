@@ -2,21 +2,20 @@
 #include "definitions.h"
 #include "motorcontrol.h"
 #include "CytronMotorDriver.h"
+#include <ST_HW_HC_SR04.h>
 
+volatile ST_HW_HC_SR04 ultr_L(ULTR_L_TRIG, ULTR_L_ECHO);
+
+volatile unsigned long previousMilis = 0;
 volatile int speed = 100;
 volatile int incomingByte = 0; // for incoming serial data 
+int echo = 0;
 
 void setup() {
     noInterrupts();
   
     Serial.begin(9600); //Communication start
 
-    // // Configure the motor driver.
-    // CytronMD motor1(PWM_DIR, PWM_PIN_M1, DIR_PIN_M1);
-    // CytronMD motor2(PWM_DIR, PWM_PIN_M2, DIR_PIN_M2);
-    
-    // timer configuration
-  
     interrupts();
 }
 
@@ -63,5 +62,17 @@ void loop() {
             break;
             
         }
+    }
+    
+    // check sensor at INTERVAL
+    unsigned long currentMilis = millis();
+    if(currentMilis - previousMilis > CHECK_INTERVAL)
+    {
+        previousMilis = currentMilis;
+        echo = ultr_L.getHitTime();      
+        if(echo)
+        {
+            Serial.print("*L:\t" + String(echo) + "\t*");
+        }      
     }
 }
