@@ -8,6 +8,7 @@
  *
  * This example shows how to drive 2 motors using 4 PWM pins (2 for each motor)
  * with 2-channel motor driver.
+ * M1A, M2A DIR PIN
  * 
  * 
  * CONNECTIONS:
@@ -82,6 +83,7 @@ void backward(){
   rear_left.setSpeed(-128);  // rear_left runs backward at 50% speed.
   Serial.print("backward");
 }
+
 
 void turn_right(){
   front_right.setSpeed(128);   // front_right runs forward at 50% speed.
