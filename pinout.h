@@ -1,10 +1,10 @@
 // pinout defined
 
 // motor control
-#define PWM_PIN_FR  7
-#define DIR_PIN_FR  6
-#define PWM_PIN_FL  12
-#define DIR_PIN_FL  11
+#define PWM_PIN_FL  7
+#define DIR_PIN_FL  6
+#define PWM_PIN_FR  12
+#define DIR_PIN_FR  11
 #define PWM_PIN_RR  8
 #define DIR_PIN_RR  9
 #define PWM_PIN_RL  4

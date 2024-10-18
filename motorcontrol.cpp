@@ -20,15 +20,15 @@ void stop(){
 }
 
 void goforward(int speed){
-    int forwardspeed = speed/2;
-    front_right.setSpeed(forwardspeed);
-    front_left.setSpeed(forwardspeed);
-    rear_right.setSpeed(forwardspeed);
-    rear_left.setSpeed(forwardspeed);
+    front_right.setSpeed(speed);
+    front_left.setSpeed(speed);
+    rear_right.setSpeed(speed);
+    rear_left.setSpeed(speed);
     Serial.println("going forward");
 }
 
 void gobackward(int speed){
+    speed = speed*2;
     front_right.setSpeed(-speed);
     front_left.setSpeed(-speed);
     rear_right.setSpeed(-speed);

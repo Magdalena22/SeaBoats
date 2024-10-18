@@ -1,4 +1,4 @@
-#define ULTR_TIMEOUT    5000
+#define ULTR_TIMEOUT    10000
 
 struct UltrasonicSensor
 {

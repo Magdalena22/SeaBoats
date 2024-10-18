@@ -10,7 +10,7 @@ const UltrasonicSensor ultr_L{ULTR_L_TRIG, ULTR_L_ECHO};
 const UltrasonicSensor ultr_R{ULTR_R_TRIG, ULTR_R_ECHO};
 
 volatile unsigned long previousMilis = 0;
-volatile int speed = 100;
+volatile int speed = 70;
 volatile int incomingByte = 0; // for incoming serial data 
 int echo = 0; // for obstacle detection
 
@@ -75,7 +75,7 @@ void loop() {
             break;
             case AUTONOMIC_MODE:
             goforward(speed);
-            operationMode = GOING_FORWARD;
+            operationMode = GOING_BACKWARD;
         }
     }
     
@@ -87,13 +87,13 @@ void loop() {
         
         // detect obstacles
         echo = getDistance(ultr_L);
-        if (echo)
+        if (echo > 17)
         {
             obstacleL = true;
             Serial.print("*L:\t" + String(echo) + "\n");
         }
         echo = getDistance(ultr_R);
-        if (echo)
+        if (echo > 17)
         {
             obstacleR = true;
             Serial.print("*R:\t" + String(echo) + "\n");   
@@ -108,8 +108,9 @@ void loop() {
                 case STOPPED:
                 case TURNING_L:
                 case TURNING_R:
-                break;
                 case GOING_FORWARD:
+                break;
+                case GOING_BACKWARD:
                 if (obstacleL)
                 {
                     goright(speed);
@@ -135,14 +136,15 @@ void loop() {
                 case MANUAL:
                 case STOPPED:
                 case GOING_FORWARD:
+                case GOING_BACKWARD:
                 break;
                 case TURNING_L:
-                goforward(speed);
-                operationMode = GOING_FORWARD;
+                gobackward(speed);
+                operationMode = GOING_BACKWARD;
                 break;
                 case TURNING_R:
-                goforward(speed);
-                operationMode = GOING_FORWARD;
+                gobackward(speed);
+                operationMode = GOING_BACKWARD;
                 break;
             }
         }
@@ -172,8 +174,8 @@ void speedChange(bool mode)
 
     switch (operationMode)
     {
-        case GOING_FORWARD:
-        goforward(speed);
+        case GOING_BACKWARD:
+        gobackward(speed);
         break;
         case TURNING_L:
         turnleft(speed);
