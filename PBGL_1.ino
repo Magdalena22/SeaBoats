@@ -43,6 +43,25 @@ void loop() {
             case GORIGHT:
             goright(speed);
             break;
+            case GODIAGONALRIGHT:
+            godiagonalright(speed);
+            break;
+            case GODIAGONALLEFT:
+            godiagonalleft(speed);
+            break;
+            case GODIAGONALBACKRIGHT:
+            godiagonalbackright(speed);
+            break;
+            case GODIAGONALBACKLEFT:
+            godiagonalbackleft(speed);
+            break;
+            case TURNRIGHT:
+            turnright(speed);
+            break;
+            case TURNLEFT:
+            turnleft(speed);
+            break;
+            
         }
     }
 }

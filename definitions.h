@@ -2,7 +2,13 @@
 
 // commands
 #define GOFORWARD   'w'
-#define GOBACK      's'
+#define GOBACK      'x'
 #define GOLEFT      'a'
 #define GORIGHT     'd'
-#define STOP        'c'
+#define STOP        's'
+#define GODIAGONALLEFT      'e'
+#define GODIAGONALRIGHT     'q'
+#define GODIAGONALBACKRIGHT 'c'
+#define GODIAGONALBACKLEFT 'z'
+#define TURNLEFT      'f'
+#define TURNRIGHT     'r'
