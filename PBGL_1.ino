@@ -9,7 +9,8 @@ volatile ST_HW_HC_SR04 ultr_L(ULTR_L_TRIG, ULTR_L_ECHO);
 volatile unsigned long previousMilis = 0;
 volatile int speed = 100;
 volatile int incomingByte = 0; // for incoming serial data 
-int echo = 0;
+int echo = 0; // for obstacle detection
+
 
 void setup() {
     noInterrupts();
@@ -60,7 +61,20 @@ void loop() {
             case TURNLEFT:
             turnleft(speed);
             break;
-            
+            case CHANGE_SPEED_FASTER:
+            speed += SPEED_INCREMENT;
+            if (speed > MAX_SPEED)
+            {
+                speed = MAX_SPEED;
+            }
+            break;
+            case CHANGE_SPEED_SLOWER:
+            SPEED -= SPEED_INCREMENT;
+            if (speed < MIN_SPEED)
+            {
+                speed = MIN_SPEED;
+            }
+            break;
         }
     }
     
