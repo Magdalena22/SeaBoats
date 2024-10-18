@@ -1,27 +1,30 @@
 #include "pinout.h"
 #include "definitions.h"
 #include "motorcontrol.h"
-#include "CytronMotorDriver.h"
-#include <ST_HW_HC_SR04.h>
+#include "ultrasoniccontrol.h"
+#include <CytronMotorDriver.h>
 
-volatile ST_HW_HC_SR04 ultr_L(ULTR_L_TRIG, ULTR_L_ECHO);
+const UltrasonicSensor ultr_L{ULTR_L_TRIG, ULTR_L_ECHO};
+const UltrasonicSensor ultr_R{ULTR_R_TRIG, ULTR_R_ECHO};
 
 volatile unsigned long previousMilis = 0;
 volatile int speed = 100;
 volatile int incomingByte = 0; // for incoming serial data 
 int echo = 0; // for obstacle detection
 
+// flags
+volatile bool obstacleL = false;
+volatile bool obstacleR = false;
+volatile Mode operationMode = MANUAL;
 
 void setup() {
     noInterrupts();
-  
-    Serial.begin(9600); //Communication start
 
+    Serial.begin(9600); //Communication start
     interrupts();
 }
 
-// interrupt communication - set proper timer -check what's in lib
-// ISR(TIMER5_COMPA_vect) {
+
 void loop() {
 
     if(Serial.available() > 0) {
@@ -69,7 +72,7 @@ void loop() {
             }
             break;
             case CHANGE_SPEED_SLOWER:
-            SPEED -= SPEED_INCREMENT;
+            speed -= SPEED_INCREMENT;
             if (speed < MIN_SPEED)
             {
                 speed = MIN_SPEED;
@@ -83,10 +86,10 @@ void loop() {
     if(currentMilis - previousMilis > CHECK_INTERVAL)
     {
         previousMilis = currentMilis;
-        echo = ultr_L.getHitTime();      
-        if(echo)
-        {
-            Serial.print("*L:\t" + String(echo) + "\t*");
-        }      
+        
+        echo = getDistance(ultr_L);
+        Serial.print("*L:\t" + String(echo) + "\n");
+        echo = getDistance(ultr_R);
+        Serial.print("*R:\t" + String(echo) + "\n");   
     }
 }

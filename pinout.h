@@ -11,5 +11,8 @@
 #define DIR_PIN_RL  5
 
 // ultrasonic sensor
-#define ULTR_L_TRIG 14
-#define ULTR_L_ECHO 15
+#define ULTR_R_TRIG 14
+#define ULTR_R_ECHO 15
+
+#define ULTR_L_TRIG 16
+#define ULTR_L_ECHO 17
