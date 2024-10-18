@@ -4,6 +4,8 @@
 #include "ultrasoniccontrol.h"
 #include <CytronMotorDriver.h>
 
+void speedChange(int speed, bool mode);
+
 const UltrasonicSensor ultr_L{ULTR_L_TRIG, ULTR_L_ECHO};
 const UltrasonicSensor ultr_R{ULTR_R_TRIG, ULTR_R_ECHO};
 
@@ -66,18 +68,10 @@ void loop() {
             turnleft(speed);
             break;
             case CHANGE_SPEED_FASTER:
-            speed += SPEED_INCREMENT;
-            if (speed > MAX_SPEED)
-            {
-                speed = MAX_SPEED;
-            }
+            speedChange(true);
             break;
             case CHANGE_SPEED_SLOWER:
-            speed -= SPEED_INCREMENT;
-            if (speed < MIN_SPEED)
-            {
-                speed = MIN_SPEED;
-            }
+            speedChange(false);
             break;
             case AUTONOMIC_MODE:
             goforward(speed);
@@ -112,7 +106,6 @@ void loop() {
             {
                 case MANUAL:
                 case STOPPED:
-                case GOING_BACKWARD:
                 case TURNING_L:
                 case TURNING_R:
                 break;
@@ -129,6 +122,10 @@ void loop() {
                 }
                 break;
             }
+
+            // reset flags
+            obstacleL = false;
+            obstacleR = false;
         }
         else
         {
@@ -138,7 +135,6 @@ void loop() {
                 case MANUAL:
                 case STOPPED:
                 case GOING_FORWARD:
-                case GOING_BACKWARD:
                 break;
                 case TURNING_L:
                 goforward(speed);
@@ -150,5 +146,42 @@ void loop() {
                 break;
             }
         }
+    }
+}
+
+void speedChange(bool mode)
+{
+    if (mode)
+    {
+        // mode = true - increase
+        speed += SPEED_INCREMENT;
+        if (speed > MAX_SPEED)
+        {
+            speed = MAX_SPEED;
+        }
+    }
+    else
+    {
+        // mode = false - decrease speed
+        speed -= SPEED_INCREMENT;
+        if (speed < MIN_SPEED)
+        {
+            speed = MIN_SPEED;
+        }
+    }
+
+    switch (operationMode)
+    {
+        case GOING_FORWARD:
+        goforward(speed);
+        break;
+        case TURNING_L:
+        turnleft(speed);
+        break;
+        case TURNING_R:
+        turnright(speed);
+        break;
+        default:
+        stop();
     }
 }
