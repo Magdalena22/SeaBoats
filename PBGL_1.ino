@@ -33,6 +33,7 @@ void loop() {
         switch(incomingByte) {
             case STOP:
             stop();
+            operationMode = MANUAL;
             break;
             case GOFORWARD:
             goforward(speed);
@@ -78,6 +79,9 @@ void loop() {
                 speed = MIN_SPEED;
             }
             break;
+            case AUTONOMIC_MODE:
+            goforward(speed);
+            operationMode = GOING_FORWARD;
         }
     }
     
@@ -87,9 +91,64 @@ void loop() {
     {
         previousMilis = currentMilis;
         
+        // detect obstacles
         echo = getDistance(ultr_L);
-        Serial.print("*L:\t" + String(echo) + "\n");
+        if (echo)
+        {
+            obstacleL = true;
+            Serial.print("*L:\t" + String(echo) + "\n");
+        }
         echo = getDistance(ultr_R);
-        Serial.print("*R:\t" + String(echo) + "\n");   
+        if (echo)
+        {
+            obstacleR = true;
+            Serial.print("*R:\t" + String(echo) + "\n");   
+        }
+
+        if (obstacleL || obstacleR)
+        {
+            // turn to avoid obstacle
+            switch(operationMode)
+            {
+                case MANUAL:
+                case STOPPED:
+                case GOING_BACKWARD:
+                case TURNING_L:
+                case TURNING_R:
+                break;
+                case GOING_FORWARD:
+                if (obstacleL)
+                {
+                    goright(speed);
+                    operationMode = TURNING_R;
+                }
+                else
+                {
+                    goleft(speed);
+                    operationMode = TURNING_L;
+                }
+                break;
+            }
+        }
+        else
+        {
+            // no obstacles - go forward
+            switch(operationMode)
+            {
+                case MANUAL:
+                case STOPPED:
+                case GOING_FORWARD:
+                case GOING_BACKWARD:
+                break;
+                case TURNING_L:
+                goforward(speed);
+                operationMode = GOING_FORWARD;
+                break;
+                case TURNING_R:
+                goforward(speed);
+                operationMode = GOING_FORWARD;
+                break;
+            }
+        }
     }
 }
