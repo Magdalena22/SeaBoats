@@ -19,84 +19,84 @@ void stop(){
     Serial.println("stopped");
 }
 
-void goforward(int speed){
-    front_right.setSpeed(speed);
-    front_left.setSpeed(speed);
-    rear_right.setSpeed(speed);
-    rear_left.setSpeed(speed);
+void goforward(int speedToSet){
+    front_right.setSpeed(speedToSet);
+    front_left.setSpeed(speedToSet);
+    rear_right.setSpeed(speedToSet);
+    rear_left.setSpeed(speedToSet);
     Serial.println("going forward");
 }
 
-void gobackward(int speed){
-    speed = speed*2;
-    front_right.setSpeed(-speed);
-    front_left.setSpeed(-speed);
-    rear_right.setSpeed(-speed);
-    rear_left.setSpeed(-speed);
+void gobackward(int speedToSet){
+    speedToSet = speedToSet*2;
+    front_right.setSpeed(-speedToSet);
+    front_left.setSpeed(-speedToSet);
+    rear_right.setSpeed(-speedToSet);
+    rear_left.setSpeed(-speedToSet);
     Serial.println("going backward");
 }
 
-void goright(int speed){
-    front_right.setSpeed(-speed);
-    front_left.setSpeed(speed);
-    rear_right.setSpeed(speed);
-    rear_left.setSpeed(-speed);
+void goright(int speedToSet){
+    front_right.setSpeed(-speedToSet);
+    front_left.setSpeed(speedToSet);
+    rear_right.setSpeed(speedToSet);
+    rear_left.setSpeed(-speedToSet);
     Serial.println("going right");
 }
 
-void goleft(int speed){
-    front_right.setSpeed(speed);
-    front_left.setSpeed(-speed);
-    rear_right.setSpeed(-speed);
-    rear_left.setSpeed(speed);
+void goleft(int speedToSet){
+    front_right.setSpeed(speedToSet);
+    front_left.setSpeed(-speedToSet);
+    rear_right.setSpeed(-speedToSet);
+    rear_left.setSpeed(speedToSet);
     Serial.println("going left");
 }
 
-void godiagonalright(int speed){
+void godiagonalright(int speedToSet){
     front_right.setSpeed(0);
-    front_left.setSpeed(speed);
-    rear_right.setSpeed(speed);
+    front_left.setSpeed(speedToSet);
+    rear_right.setSpeed(speedToSet);
     rear_left.setSpeed(0);
     Serial.println("going diagonal right");
 }
 
-void godiagonalleft(int speed){
-    front_right.setSpeed(speed);
+void godiagonalleft(int speedToSet){
+    front_right.setSpeed(speedToSet);
     front_left.setSpeed(0);
     rear_right.setSpeed(0);
-    rear_left.setSpeed(speed);
+    rear_left.setSpeed(speedToSet);
     Serial.println("going diagonal left");
 }
 
-void godiagonalbackright(int speed){
-    front_right.setSpeed(-speed);
+void godiagonalbackright(int speedToSet){
+    front_right.setSpeed(-speedToSet);
     front_left.setSpeed(0);
     rear_right.setSpeed(0);
-    rear_left.setSpeed(-speed);
+    rear_left.setSpeed(-speedToSet);
     Serial.println("going diagonal backright");
 }
 
-void godiagonalbackleft(int speed){
+void godiagonalbackleft(int speedToSet){
     front_right.setSpeed(0);
-    front_left.setSpeed(-speed);
-    rear_right.setSpeed(-speed);
+    front_left.setSpeed(-speedToSet);
+    rear_right.setSpeed(-speedToSet);
     rear_left.setSpeed(0);
     Serial.println("going diagonal backleft");
 }
 
-void turnright(int speed){
-    front_right.setSpeed(speed);
-    front_left.setSpeed(-speed);
-    rear_right.setSpeed(speed);
-    rear_left.setSpeed(-speed);
+void turnright(int speedToSet){
+    front_right.setSpeed(speedToSet);
+    front_left.setSpeed(-speedToSet);
+    rear_right.setSpeed(speedToSet);
+    rear_left.setSpeed(-speedToSet);
     Serial.println("turn right");
 }
 
-void turnleft(int speed){
-    front_right.setSpeed(-speed);
-    front_left.setSpeed(speed);
-    rear_right.setSpeed(-speed);
-    rear_left.setSpeed(speed);
+void turnleft(int speedToSet){
+    front_right.setSpeed(-speedToSet);
+    front_left.setSpeed(speedToSet);
+    rear_right.setSpeed(-speedToSet);
+    rear_left.setSpeed(speedToSet);
     Serial.println("turn left");
 }
 

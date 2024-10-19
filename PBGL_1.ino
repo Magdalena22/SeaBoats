@@ -10,7 +10,7 @@ const UltrasonicSensor ultr_L{ULTR_L_TRIG, ULTR_L_ECHO};
 const UltrasonicSensor ultr_R{ULTR_R_TRIG, ULTR_R_ECHO};
 
 volatile unsigned long previousMilis = 0;
-volatile int speed = 70;
+volatile int speed = FAST_SPEED;
 volatile int incomingByte = 0; // for incoming serial data 
 int echo = 0; // for obstacle detection
 
@@ -68,10 +68,12 @@ void loop() {
             turnleft(speed);
             break;
             case CHANGE_SPEED_FASTER:
-            speedChange(true);
+            // speedChange(true);
+            speed = FAST_SPEED;
             break;
             case CHANGE_SPEED_SLOWER:
-            speedChange(false);
+            // speedChange(false);
+            speed = SLOW_SPEED;
             break;
             case AUTONOMIC_MODE:
             goforward(speed);
@@ -87,13 +89,13 @@ void loop() {
         
         // detect obstacles
         echo = getDistance(ultr_L);
-        if (echo > 17)
+        if (echo)
         {
             obstacleL = true;
             Serial.print("*L:\t" + String(echo) + "\n");
         }
         echo = getDistance(ultr_R);
-        if (echo > 17)
+        if (echo)
         {
             obstacleR = true;
             Serial.print("*R:\t" + String(echo) + "\n");   

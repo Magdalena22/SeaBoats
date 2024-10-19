@@ -14,9 +14,10 @@ int getDistance(UltrasonicSensor sensor)
     digitalWrite(sensor.trigger_pin, LOW);
 
     // get measurement
-    float measurement = pulseIn(sensor.echo_pin, HIGH, ULTR_TIMEOUT);
+    int measurement = (int)pulseIn(sensor.echo_pin, HIGH, ULTR_TIMEOUT);
     // in cm
-    int distance = (int)(measurement / 2 / 29.1);
+    // int distance = (int)(measurement / 2 / 29.1);
     
-    return distance;
+    // return distance;
+    return measurement;
 }

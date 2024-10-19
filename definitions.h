@@ -23,5 +23,7 @@
 #define MAX_SPEED           255
 #define MIN_SPEED           30
 #define SPEED_INCREMENT     10
+#define SLOW_SPEED          40
+#define FAST_SPEED          80
 
 enum Mode { MANUAL, STOPPED, GOING_FORWARD, GOING_BACKWARD, TURNING_L, TURNING_R };
