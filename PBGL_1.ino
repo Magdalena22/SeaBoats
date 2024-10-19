@@ -115,12 +115,12 @@ void loop() {
                 case GOING_BACKWARD:
                 if (obstacleL)
                 {
-                    goright(speed);
+                    turnleft(speed);
                     operationMode = TURNING_R;
                 }
                 else
                 {
-                    goleft(speed);
+                    turnright(speed);
                     operationMode = TURNING_L;
                 }
                 break;
