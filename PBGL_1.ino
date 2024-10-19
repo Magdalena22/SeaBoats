@@ -76,7 +76,7 @@ void loop() {
             speed = SLOW_SPEED;
             break;
             case AUTONOMIC_MODE:
-            goforward(speed);
+            gobackward(speed);
             operationMode = GOING_BACKWARD;
         }
     }
